@@ -1,0 +1,70 @@
+<html>
+	<head>
+		<script type="text/javascript" src="SubClass.js"></script>
+
+		<script type="text/javascript">
+			function Operation(name)
+			{
+				// base constructor
+				var base = Function.subClass(this);
+
+				// private
+				var name = name;
+				var getName = function() { return name; };
+				var elaborate = function(a, b) { return getName() + "(" + a + ", " + b + ") = " + this.Protected().elaborate(a, b); }
+
+				// protected
+				this.Protected().elaborate = function(a, b) { return 0; }
+
+				// public
+				this.getName = getName;
+				this.elaborate = elaborate;
+			}
+
+			function Sum()
+			{
+				// parent constructor
+				var base = Function.subClass(this, Operation, ["Sum"]);
+
+				// protected
+				this.Protected().elaborate = function(a, b) { return a + b; }
+			}
+
+			function Multiplication()
+			{
+				// parent constructor
+				var base = Function.subClass(this, Operation, ["Multiplication"]);
+
+				// protected
+				this.Protected().elaborate = function(a, b) { return a * b; }
+			}
+
+			function SumNew()
+			{
+				// parent constructor
+				var base = Function.subClass(this, Sum);
+
+				// private
+				var elaborate = function(a, b) { return "new " + base.elaborate(a, b); }
+
+				// public
+				this.elaborate = elaborate;
+			}
+
+			var s = new Sum();
+			var m = new Multiplication();
+			var sNew = new SumNew();
+		</script>
+	</head>
+	<body>
+		<h1>
+			<script type="text/javascript">
+				document.write(s.elaborate(2, 4));
+				document.write("<br/>");
+				document.write(m.elaborate(2, 4));
+				document.write("<br/>");
+				document.write(sNew.elaborate(2, 4));
+			</script>
+		</h1>
+	</body>
+</html>
