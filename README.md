@@ -10,6 +10,8 @@ Of course you pay a price in terms of performance, but for me are more important
 
 In the example html I made a base class and three subclasses for explain how to create private, public and protected methods and show the polymorphism feature.
 
+**Attention:** The protected methods must be idempotents (They don't have to modify the state of the object).
+
 ```javascript
 function BASE_CLASS(startValue)
 {
@@ -40,9 +42,7 @@ var result = o.publicMethod();
 // result == 18
 ``` 
 
-Warning: In this approach the protected methods can be call and reassigned from outside the class, but is a bad practice. Don't do it!
-
-Anyway the protected methods must be idempotents (They don't have to modify the state of the object).
+**Warning:** In this approach the protected methods can be call and reassigned from outside the class, but is a bad practice.
 
 ```javascript
 var o = new SUB_CLASS(6);
